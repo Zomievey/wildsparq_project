@@ -12,25 +12,23 @@
     </ul>
   </nav>
 
-  <section>
-    <!-- <div id="videobox" class="container text-center">
+
+  <!-- <div id="videobox" class="container text-center">
       <iframe width="560" height="315" src="https://www.youtube.com/embed/3dHNOWTI7H8" title="YouTube video player"
         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div> -->
-    <div class="container text-center">
-      <a
-        (click)="loadSingle()"
-        class="btn-primary btn lg"
-        href="javascript:void(0)"
-        role="button"
-      >
-        Load Video
-      </a>
+  <div class="container text-center">
+    <div (click)="loadSingle()" class="center">
+      <div id="show_button" class="btn-1">
+        <a href="javascript:void()" role="button"><span>Load Video</span></a>
+      </div>
+
       <div *ngFor="let post of posts">
         <div class="mt-5">
           <h1 style="color: white">{{ post.snippet.title }}</h1>
         </div>
+
         <!-- <div id="videobox" class="container text-center">
           <iframe
             width="560"
@@ -44,5 +42,6 @@
         </div> -->
       </div>
     </div>
-  </section>
+  </div>
+
 </div>
