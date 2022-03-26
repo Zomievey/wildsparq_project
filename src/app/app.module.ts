@@ -1,18 +1,30 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { RouterModule } from "@angular/router";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { PlaylistComponent } from "./components/playlist/playlist.component";
+import { SingleViewComponent } from "./components/singleview/singleview.component";
+import { HomepageComponent } from "./components/homepage/homepage.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PlaylistComponent,
+    SingleViewComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot([
+      { path: "homepage", component: HomepageComponent },
+      { path: "playlist", component: PlaylistComponent },
+      { path: "singleview", component: SingleViewComponent },
+    ]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

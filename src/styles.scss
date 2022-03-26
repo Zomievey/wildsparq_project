@@ -1,0 +1,126 @@
+body {
+  background-color: black;
+  font-family: "Quicksand", sans-serif;
+}
+
+.logo-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  height: 4rem;
+}
+
+.logotwo {
+  margin-top: 11px;
+  background-size: cover;
+  background-image: url(assets/wildsparq-removebg-preview.png);
+  height: 2em;
+  width: 2em;
+}
+#nav-item {
+  color: rgb(255, 255, 255);
+  font-size: 2em;
+}
+#nav-item2 {
+  text-align: end;
+  color: white;
+  font-size: 2em;
+}
+
+#nav-item:hover {
+  color: rgb(214, 111, 111);
+  cursor: pointer;
+}
+#nav-item2:hover {
+  color: rgb(214, 111, 111);
+  cursor: pointer;
+}
+
+/* .nav-bar {
+
+  display: flex;
+  box-shadow: 0 0 5px #ccc;
+  background-color: rgba(211, 211, 211, 0.363);
+ 
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  align-items: center;
+} */
+
+.email {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.single {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#single-p {
+  margin-top: 3em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-size {
+  width: 30em;
+}
+
+.home-card {
+  box-shadow: 0 0 5px #ccc;
+  /* margin-top: 2em; */
+  display: flex;
+  flex-direction: row;
+  height: 32em;
+  align-items: center;
+  border: 1px solid;
+  background-color: white;
+}
+
+/* #nav-image {
+  width: 19em;
+  height: 15.5em;
+  background-size: cover;
+} */
+
+/* #logo-image {
+  height: 21em;
+  padding: 1em;
+} */
+
+#home-container {
+  display: flex;
+  justify-content: center;
+}
+
+.bar {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#image-row {
+  padding: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-bar {
+  display: flex;
+  flex-wrap: nowrap;
+}
