@@ -1,0 +1,51 @@
+<div class="container">
+  <nav class="nav-bar row">
+    <div class="logotwo"></div>
+    <div class="logo-nav col-6">
+      <h1>Wildsparq</h1>
+    </div>
+    <ul class="nav col-6">
+      <li id="nav-item" routerLink="/homepage" class="nav-item mx-3">Home |</li>
+      <li id="nav-item2" routerLink="/singleview" class="nav-item mx-3">
+        Watch Video |
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="container text-center">
+  <div (click)="loadPlaylist()" class=" row center">
+    <div id="show_button" class="btn-1">
+      <a href="javascript:void(0)" role="button"><span>Load Videos</span></a>
+    </div>
+    <div class="column" *ngFor="let playlist of playlists">
+      <!-- <div class="mt-5 row">
+      <div class="col-md-4"> -->
+      <div class="mt-5">
+        <h1 (click)="openPlaylist(playlist.id)" style="color: white">{{ playlist.snippet.title }}</h1>
+
+        <!-- <div> {{playlist.snippet.thumbnails.medium.url}}</div> -->
+        <div class="mx-3">
+
+          <img src="{{playlist.snippet.thumbnails.standard.url}}">
+
+          <!-- <iframe class="video"
+          src="https://www.youtube.com/embed/{{
+            playlist.snippet.thumbnails.standard.url
+          }}"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe> -->
+
+        </div> <br>
+        <!-- <div>
+          <h3 style="color: white">{{ playlist.snippet.localized.description }}</h3>
+        </div> -->
+      </div>
+    </div>
+    <!-- </div>
+https://www.youtube.com/watch?v=8bPDiuJGGh0
+  </div> -->
+  </div>
+</div>

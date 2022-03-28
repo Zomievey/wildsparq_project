@@ -1,47 +1,17 @@
 <div class="container">
-  <nav class="nav-bar row">
-    <div class="logotwo"></div>
-    <div class="logo-nav col-6">
-      <h1>Wildsparq</h1>
-    </div>
-    <ul class="nav col-6">
-      <li id="nav-item" routerLink="/homepage" class="nav-item mx-3">Home |</li>
-      <li id="nav-item2" routerLink="/singleview" class="nav-item mx-3">
-        Watch Video |
-      </li>
-    </ul>
-  </nav>
-</div>
-
-<div class="container text-center">
-  <div (click)="loadPlaylist()" class="center">
-    <div class="btn-1">
-      <a href="javascript:void(0)" role="button"><span>Load Videos</span></a>
-    </div>
-    <div *ngFor="let post of posts">
-      <!-- <div class="mt-5 row">
-      <div class="col-md-4"> -->
-      <div class="mt-5">
-        <h1 style="color: white">{{ post.snippet.title }}</h1>
-        <h5 style="color: white">{{ post.snippet.thumbnails.standard.url }}</h5>
-        <!-- <div> {{post.snippet.thumbnails.medium.url}}</div> -->
-        <!-- <div>
-        <iframe
-          src="https://www.youtube.com/embed/{{
-            post.snippet.thumbnails.standard.url
-          }}"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div> -->
-        <div>
-          <h3 style="color: white">{{ post.snippet.localized.description }}</h3>
-        </div>
+    <nav class="nav-bar row">
+      <div class="logotwo"></div>
+      <div class="logo-nav col-6">
+        <h1>Wildsparq</h1>
       </div>
-    </div>
-    <!-- </div>
-
-  </div> -->
+      <ul class="nav col-6">
+        <li (click)="onClick()" routerLink="/homepage" id="nav-item" class="nav-item mx-3">
+          Home |
+        </li>
+        <li (click)="onClick()" routerLink="/playlists" id="nav-item" class="nav-item mx-3">
+          Playlists |
+        </li>
+        
+      </ul>
+    </nav>
   </div>
-</div>
