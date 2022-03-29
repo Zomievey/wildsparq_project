@@ -9,10 +9,12 @@ import { Router } from "@angular/router";
   styleUrls: ["./playlists.component.scss"],
 })
 export class PlaylistsComponent {
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private router: Router,
-  
-    private http: HttpClient) { }
+
+    private http: HttpClient
+  ) {}
   playlists: any[] = [];
 
   loadPlaylist() {
@@ -28,12 +30,9 @@ export class PlaylistsComponent {
       });
   }
 
-  openPlaylist(playlistId : any) {
-    debugger;
-    this.router.navigate(["playlist", playlistId])
+  openPlaylist(playlistId: any) {
+    this.router.navigate(["playlist", playlistId]);
   }
-  
-
 }
 
 // ngOnInit(): void {}

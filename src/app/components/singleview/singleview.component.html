@@ -6,7 +6,7 @@
     </div>
     <ul class="nav col-6">
       <li id="nav-item" routerLink="/homepage" class="nav-item mx-3">Home |</li>
-      <li id="nav-item2" routerLink="/playlist" class="nav-item mx-3">
+      <li id="nav-item2" routerLink="/playlists" class="nav-item mx-3">
         Playlists |
       </li>
     </ul>
@@ -18,30 +18,37 @@
         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div> -->
-  <div class="container text-center">
-    <div (click)="loadSingle()" class="center">
-      <div id="show_button" class="btn-1">
-        <a href="javascript:void()" role="button"><span>Load Video</span></a>
-      </div>
+  <div class="container col-md-12 text-center">
+    <div class="center">
 
-      <div *ngFor="let post of posts">
+
+      <div *ngIf="videoId">
         <div class="mt-5">
-          <h1 style="color: white">{{ post.snippet.title }}</h1>
+          <h1 class="title">{{video.snippet.title }}</h1>
         </div>
 
-        <!-- <div id="videobox" class="container text-center">
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/{{ post.snippet.title }}"
-            title="YouTube video player"
-            frameborder="0"
+
+        <!-- <a href="https://www.youtube.com/embed/{{video.id}}" target="_blank"> -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe width="560" height="315" class="embed-responsive-item img-fluid" src="https://www.youtube.com/embed/_cgnL96VeME"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      
+
+        <!-- <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/{{ video.id}}?autoplay=1&loop=1&playlist=_cgnL96VeME"
+            title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div> -->
+            allowfullscreen></iframe> -->
+        <!-- <iframe [src]="https://www.youtube.com/embed/{{ video.id }} | safe: 'resourceUrl'" width="640" height="390"></iframe> -->
+        <!-- <h3>{{video}}</h3> -->
+        <!-- </a> -->
+
+
+        <h3 id="description" class="mt-2">{{video.snippet.description}}</h3>
+        <button (click)="seeMore()" (dblclick)="seeLess()" class="btn-danger btn-sm mb-2 redbutton">See More / See Less</button>
       </div>
     </div>
   </div>
-
 </div>
