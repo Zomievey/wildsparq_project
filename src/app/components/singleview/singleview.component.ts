@@ -12,7 +12,7 @@ export class SingleViewComponent implements OnInit {
     @Output() nextVideo: EventEmitter<any> = new EventEmitter<any>();
     @Output() previousVideo: EventEmitter<any> = new EventEmitter<any>();
     safeVideoUrl: SafeResourceUrl = "";
-    video: any = null;
+    video: any = "";
     showMore: boolean = false;
 
     constructor(
@@ -35,7 +35,7 @@ export class SingleViewComponent implements OnInit {
 
     seeMore() {
         const el: any = document.getElementById("description");
-        el.style.height = "275px";
+        el.style.height = "300px";
     }
 
     seeLess() {

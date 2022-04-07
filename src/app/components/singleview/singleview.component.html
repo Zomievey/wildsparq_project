@@ -20,13 +20,14 @@
             <!--          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
             <!--        </div>-->
 
-            <a (click)="previousVideo.emit()" class="previous round">&#8249;</a>
-            <iframe width="560" height="315"
-                    [src]="safeVideoUrl"
-                    title="YouTube video player" frameborder="0"
+
+            <div id="video-box" class="mb-5 mt-5">
+                <a (click)="previousVideo.emit()" class="previous round">&#8249;</a>
+                <iframe width="560" height="315" [src]="safeVideoUrl" title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-            <a (click)="nextVideo.emit()" class="next round">&#8250;</a>
+                    allowfullscreen></iframe><a (click)="nextVideo.emit()" class="next round">&#8250;</a>
+            </div>
+
             <!-- <iframe [src]="https://www.youtube.com/embed/{{ video.id }} | safe: 'resourceUrl'" width="640" height="390"></iframe> -->
             <!-- <h3>{{video}}</h3> -->
             <!-- </a> -->

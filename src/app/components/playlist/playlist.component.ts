@@ -1,6 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {YoutubeService} from "../../services/youtube.service";
+import { YoutubeService } from "../../services/youtube.service";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+
+
 
 @Component({
     selector: "app-playlist",
@@ -11,23 +14,29 @@ export class PlaylistComponent implements OnInit {
     playlistId: string | null = "";
     playListItems: any[] = [];
     activeVideoIndex: number | null = null;
+    safeVideoUrl: SafeResourceUrl = "";
+    video: any = "";
+    showMore: boolean = false;
+
 
     constructor(
-        private youtubeService: YoutubeService, //Inject our youtube service so we can fetch the playlist
-        private router: Router, //Inject our router so that we can navigate to a different page
-        private route: ActivatedRoute, //Inject our route so that we can get our playlist id query param
-        private changeDetectorRef: ChangeDetectorRef
+        private youtubeService: YoutubeService, //Inject the youtube service so we can fetch the playlist
+        private router: Router, //Inject the router so that we can navigate to a different page
+        private route: ActivatedRoute, //Inject the route so that we can get our playlist id query param
+        private changeDetectorRef: ChangeDetectorRef,
+        private domSanitizer: DomSanitizer
     ) {
     }
 
     ngOnInit(): void {
         this.route
-            .queryParams //from our route's query parameters get our playlist Id
+            .queryParams //from the route's query parameters get our playlist Id
             .subscribe((params) => {
                 this.playlistId = this.route.snapshot.paramMap.get("id")!; //Get the playlist Id
-                this.youtubeService.getPlaylist(this.playlistId) //Fetch our playlist from youtube
+                this.youtubeService.getPlaylist(this.playlistId) //Fetch the playlist from youtube
                     .subscribe((apiPlaylist: any) => {
-                        this.playListItems = apiPlaylist.items; //Save our playlist to a class variable
+                        this.playListItems = apiPlaylist.items; //Save the playlist to a class variable
+                        this.safeVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.getActiveVideoId()); //Get the first video in the playlist
                     });
             });
     }
@@ -37,6 +46,7 @@ export class PlaylistComponent implements OnInit {
     }
 
     onClick() {
+        return `https://www.youtube.com/embed/${this.video?.id}`;
     }
 
     nextVideo() {
@@ -51,4 +61,5 @@ export class PlaylistComponent implements OnInit {
     getActiveVideoId() {
         return this.playListItems[this.activeVideoIndex!]?.contentDetails.videoId;
     }
+
 }
