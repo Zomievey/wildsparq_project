@@ -1,54 +1,41 @@
-<div class="container">
-  <nav class="nav-bar row">
-    <div class="logotwo"></div>
-    <div class="logo-nav col-6">
-      <h1>Wildsparq</h1>
-    </div>
-    <ul class="nav col-6">
-      <li id="nav-item" routerLink="/homepage" class="nav-item mx-3">Home |</li>
-      <li id="nav-item2" routerLink="/playlists" class="nav-item mx-3">
-        Playlists |
-      </li>
-    </ul>
-  </nav>
-
-
-  <!-- <div id="videobox" class="container text-center">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/3dHNOWTI7H8" title="YouTube video player"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div> -->
-  <div class="container col-md-12 text-center">
+<!-- <div id="videobox" class="container text-center">
+     <iframe width="560" height="315" src="https://www.youtube.com/embed/3dHNOWTI7H8" title="YouTube video player"
+       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+       allowfullscreen></iframe>
+   </div> -->
+<div class="container col-md-12 text-center">
     <div class="center">
 
 
-      <div *ngIf="videoId">
-        <div class="mt-5">
-          <h1 class="title">{{video.snippet.title }}</h1>
+        <div *ngIf="videoId">
+            <div class="mt-5">
+                <h1 class="title">{{video.snippet.title }}</h1>
+            </div>
+
+
+            <!--         <a href="https://www.youtube.com/embed/{{video.id}}" target="_blank"> -->
+            <!--        <div class="embed-responsive embed-responsive-16by9">-->
+            <!--          <iframe width="560" height="315" class="embed-responsive-item img-fluid" src="https://www.youtube.com/embed/_cgnL96VeME"-->
+            <!--          frameborder="0"-->
+            <!--          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+            <!--        </div>-->
+
+            <a (click)="previousVideo.emit()" class="previous round">&#8249;</a>
+            <iframe width="560" height="315"
+                    [src]="safeVideoUrl"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            <a (click)="nextVideo.emit()" class="next round">&#8250;</a>
+            <!-- <iframe [src]="https://www.youtube.com/embed/{{ video.id }} | safe: 'resourceUrl'" width="640" height="390"></iframe> -->
+            <!-- <h3>{{video}}</h3> -->
+            <!-- </a> -->
+
+
+            <h3 id="description" class="mt-2">{{video.snippet.description}}</h3>
+            <button (click)="toggleDescription()" class="btn-danger btn-sm mb-2 redbutton">See More / See
+                Less
+            </button>
         </div>
-
-
-        <!-- <a href="https://www.youtube.com/embed/{{video.id}}" target="_blank"> -->
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe width="560" height="315" class="embed-responsive-item img-fluid" src="https://www.youtube.com/embed/_cgnL96VeME"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      
-
-        <!-- <iframe width="560" height="315"
-            src="https://www.youtube.com/embed/{{ video.id}}?autoplay=1&loop=1&playlist=_cgnL96VeME"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe> -->
-        <!-- <iframe [src]="https://www.youtube.com/embed/{{ video.id }} | safe: 'resourceUrl'" width="640" height="390"></iframe> -->
-        <!-- <h3>{{video}}</h3> -->
-        <!-- </a> -->
-
-
-        <h3 id="description" class="mt-2">{{video.snippet.description}}</h3>
-        <button (click)="seeMore()" (dblclick)="seeLess()" class="btn-danger btn-sm mb-2 redbutton">See More / See Less</button>
-      </div>
     </div>
-  </div>
 </div>

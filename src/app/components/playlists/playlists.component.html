@@ -1,42 +1,27 @@
-<div class="container">
-  <nav class="nav-bar row">
-    <div class="logotwo"></div>
-    <div class="logo-nav col-6">
-      <h1>Wildsparq</h1>
-    </div>
-    <ul class="nav col-6">
-      <li id="nav-item" routerLink="/homepage" class="nav-item mx-3">Home |</li>
-      <!-- <li id="nav-item2" routerLink="/singleview" class="nav-item mx-3">
-        Watch Video |
-      </li> -->
-    </ul>
-  </nav>
-</div>
-
 <div class="container text-center">
   <div (click)="loadPlaylist()" class=" row center">
     <div id="show_button" class="btn-1">
       <a href="javascript:void(0)" role="button"><span>Load Playlists</span></a>
     </div>
-    <div class="column" *ngFor="let playlist of playlists">
-      <!-- <div class="mt-5 row">
-      <div class="col-md-4"> -->
-      <div class="mt-5">
-        <h1 class="title" (click)="openPlaylist(playlist.id)" >{{ playlist.snippet.title }}</h1>
+    <div class="column" *ngFor="let playlist of playlists;index as i;">
+        <!-- <div class="mt-5 row">
+        <div class="col-md-4"> -->
+        <div class="mt-5">
+            <h1 class="title" (click)="openPlaylist(playlist.id)">{{i + 1 + ". " + playlist.snippet.title }}</h1>
 
-        <!-- <div> {{playlist.snippet.thumbnails.medium.url}}</div> -->
-        <div class="mx-3">
+            <!-- <div> {{playlist.snippet.thumbnails.medium.url}}</div> -->
+            <div class="mx-3">
 
-          <img class="img-fluid" src="{{playlist.snippet.thumbnails.standard.url}}">
+                <img class="img-fluid" src="{{playlist?.snippet?.thumbnails?.high?.url}}">`
 
-          <!-- <iframe class="video"
-          src="https://www.youtube.com/embed/{{
-            playlist.snippet.thumbnails.standard.url
-          }}"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe> -->
+                <!-- <iframe class="video"
+                src="https://www.youtube.com/embed/{{
+                  playlist.snippet.thumbnails.standard.url
+                }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe> -->
 
         </div> 
         <!-- <div>

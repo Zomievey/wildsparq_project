@@ -1,33 +1,22 @@
-<div class="container">
-  <nav class="nav-bar row">
-    <div class="logotwo"></div>
-    <div class="logo-nav col-6">
-      <h1>Wildsparq</h1>
+<div *ngIf="activeVideoIndex === null">
+    <div class="container mt-5" *ngFor="let video of playListItems; index as i;">
+        <!-- <div class="mt-5 row">
+          <div class="col-md-4"> -->
+        <div class="col text-center">
+
+            <h1 class="title row center" (click)="openVideo(i) ">
+
+                {{ video.snippet.title }}
+            </h1>
+
+            <!-- <div> {{playlist.snippet.thumbnails.medium.url}}</div> -->
+            <div>
+                <img class="img-fluid" src="{{ video?.snippet?.thumbnails?.high?.url }}"/>
+            </div>
+        </div>
     </div>
-    <ul class="nav col-6">
-      <li (click)="onClick()" routerLink="/homepage" id="nav-item" class="nav-item mx-3">
-        Home |
-      </li>
-      <li (click)="onClick()" routerLink="/playlists" id="nav-item" class="nav-item mx-3">
-        Playlists |
-      </li>
-    </ul>
-  </nav>
 </div>
-
-<div class="container mt-5" *ngFor="let video of playListItems">
-  <!-- <div class="mt-5 row">
-    <div class="col-md-4"> -->
-  <div class="col text-center">
-   
-      <h1 class="title row center" (click)="openVideo(video.contentDetails.videoId) ">
-    
-    {{ video.snippet.title }}
-    </h1>
-
-    <!-- <div> {{playlist.snippet.thumbnails.medium.url}}</div> -->
-    <div >
-      <img class="img-fluid" src="{{ video.snippet.thumbnails.standard.url }}" />
-    </div>
-  </div>
+<div *ngIf="activeVideoIndex !== null">
+    <app-single-view [videoId]="getActiveVideoId()" (nextVideo)="nextVideo()"
+                     (previousVideo)="previousVideo()"></app-single-view>
 </div>

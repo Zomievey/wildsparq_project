@@ -1,40 +1,54 @@
-import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Router } from "@angular/router";
+import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {YoutubeService} from "../../services/youtube.service";
 
 @Component({
-  selector: "app-playlist",
-  templateUrl: "./playlist.component.html",
-  styleUrls: ["./playlist.component.scss"],
+    selector: "app-playlist",
+    templateUrl: "./playlist.component.html",
+    styleUrls: ["./playlist.component.scss"],
 })
 export class PlaylistComponent implements OnInit {
-  playlistId: string | null = "";
-  playListItems: any[] = [];
+    playlistId: string | null = "";
+    playListItems: any[] = [];
+    activeVideoIndex: number | null = null;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    constructor(
+        private youtubeService: YoutubeService, //Inject our youtube service so we can fetch the playlist
+        private router: Router, //Inject our router so that we can navigate to a different page
+        private route: ActivatedRoute, //Inject our route so that we can get our playlist id query param
+        private changeDetectorRef: ChangeDetectorRef
+    ) {
+    }
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.playlistId = this.route.snapshot.paramMap.get("id");
-      
-      this.http
-        .get(
-          `https://youtube.googleapis.com/youtube/v3/playlistItems?playlistId=${this.playlistId}&maxResults=10&key=AIzaSyBvfOzusG95vCd7XWMYLTe4Uxd7T_EdEFM&part=snippet,contentDetails`
-        )
-        .subscribe((apiPlaylists: any) => {
-          console.log(apiPlaylists);
-          this.playListItems = apiPlaylists.items;
-        });
-    });
-  }
-  openVideo(videoId: string) {
-    this.router.navigate(["video", videoId]);
-  }
+    ngOnInit(): void {
+        this.route
+            .queryParams //from our route's query parameters get our playlist Id
+            .subscribe((params) => {
+                this.playlistId = this.route.snapshot.paramMap.get("id")!; //Get the playlist Id
+                this.youtubeService.getPlaylist(this.playlistId) //Fetch our playlist from youtube
+                    .subscribe((apiPlaylist: any) => {
+                        this.playListItems = apiPlaylist.items; //Save our playlist to a class variable
+                    });
+            });
+    }
 
-  onClick() {}
+    openVideo(videoIndex: number) {
+        this.activeVideoIndex = videoIndex;
+    }
+
+    onClick() {
+    }
+
+    nextVideo() {
+        this.activeVideoIndex = Math.min(this.activeVideoIndex! + 1, this.playListItems.length - 1)
+        this.changeDetectorRef.detectChanges()
+    }
+
+    previousVideo() {
+        this.activeVideoIndex = Math.max(this.activeVideoIndex! - 1, 0)
+    }
+
+    getActiveVideoId() {
+        return this.playListItems[this.activeVideoIndex!]?.contentDetails.videoId;
+    }
 }

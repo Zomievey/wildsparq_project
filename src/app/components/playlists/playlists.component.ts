@@ -1,41 +1,32 @@
-import { HttpClient } from "@angular/common/http";
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Router } from "@angular/router";
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {YoutubeService} from "../../services/youtube.service";
 
 @Component({
-  selector: "app-playlist",
-  templateUrl: "./playlists.component.html",
-  styleUrls: ["./playlists.component.scss"],
+    selector: "app-playlist",
+    templateUrl: "./playlists.component.html",
+    styleUrls: ["./playlists.component.scss"],
 })
 export class PlaylistsComponent {
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
+    constructor(
+        private router: Router, //Inject our router so that we can navigate to a different page
+        private youtubeService: YoutubeService //inject our youtube service in order to fetch playlists
+    ) {
+    }
 
-    private http: HttpClient
-  ) {}
-  playlists: any[] = [];
+    playlists: any[] = [];
 
-  loadPlaylist() {
-    const el: any = document.getElementById("show_button");
-    el.style.display = "none";
-    this.http
-      .get(
-        "https://youtube.googleapis.com/youtube/v3/playlists?part=snippet,contentDetails&maxResults=10&key=AIzaSyBvfOzusG95vCd7XWMYLTe4Uxd7T_EdEFM&id=PLEx5khR4g7PJELLTYwXZHcimWAwTUaWGA,PLEx5khR4g7PJquVHXtkcdo-QzK54bfmY9,PLEx5khR4g7PIEfXSB9bDS4lB-J9stOynD,PLEx5khR4g7PLCoWS5k9u2WQ8RdKqhKEKn,PLEx5khR4g7PLIOpqqfKfd6OAbzXSa_vBZ"
-      )
-      .subscribe((apiPlaylists: any) => {
-        this.playlists = apiPlaylists.items;
-        console.log(this.playlists);
-      });
-  }
+    loadPlaylist() {
+        const el: any = document.getElementById("show_button");
+        el.style.display = "none";
+        this.youtubeService //Fetch our playlists
+            .getPlaylists()
+            .subscribe((apiPlaylists: any) => {
+                this.playlists = apiPlaylists.items; //Save fetched playlists to class variable
+            });
+    }
 
-  openPlaylist(playlistId: any) {
-    this.router.navigate(["playlist", playlistId]);
-  }
+    openPlaylist(playlistId: any) {
+        this.router.navigate(["playlist", playlistId]);
+    }
 }
-
-// ngOnInit(): void {}
-// togglePlaylist() {
-//   alert("Playlist toggled");
-// }

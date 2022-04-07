@@ -1,39 +1,59 @@
-import { Component, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { ActivatedRoute } from "@angular/router";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {YoutubeService} from "../../services/youtube.service";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
-  selector: "app-single-view",
-  templateUrl: "./singleview.component.html",
-  styleUrls: ["./singleview.component.scss"],
+    selector: "app-single-view",
+    templateUrl: "./singleview.component.html",
+    styleUrls: ["./singleview.component.scss"],
 })
 export class SingleViewComponent implements OnInit {
-  videoId: string | null = "";
-  video: any = null;
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
-  posts: any[] = [];
+    @Input() videoId: string = "";
+    @Output() nextVideo: EventEmitter<any> = new EventEmitter<any>();
+    @Output() previousVideo: EventEmitter<any> = new EventEmitter<any>();
+    safeVideoUrl: SafeResourceUrl = "";
+    video: any = null;
+    showMore: boolean = false;
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.videoId = this.route.snapshot.paramMap.get("id");
+    constructor(
+        private youtubeService: YoutubeService,
+        private domSanitizer: DomSanitizer
+    ) {
+    }
 
-      this.http
-        .get(
-          `https://youtube.googleapis.com/youtube/v3/videos?id=${this.videoId}&key=AIzaSyBvfOzusG95vCd7XWMYLTe4Uxd7T_EdEFM&part=snippet,contentDetails`
-        )
-        .subscribe((video: any) => {
-          console.log(video);
-          this.video = video.items[0];
-        });
-    });
-  }
-  seeMore() {
-    const el: any = document.getElementById("description");
-    el.style.height = "275px";
-  }
-  seeLess() {
-    const el: any = document.getElementById("description");
-    el.style.height = "75px";
-    el;
-  }
+    posts: any[] = [];
+
+    ngOnInit(): void {
+        this.youtubeService
+            .getVideo(this.videoId)
+            .subscribe((video: any) => {
+                console.log(video);
+                this.video = video.items[0];
+                this.safeVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.getVideoUrl());
+            });
+    }
+
+    seeMore() {
+        const el: any = document.getElementById("description");
+        el.style.height = "275px";
+    }
+
+    seeLess() {
+        const el: any = document.getElementById("description");
+        el.style.height = "75px";
+        el;
+    }
+
+    getVideoUrl(): string {
+        return `https://www.youtube.com/embed/${this.video?.id}`;
+    }
+
+    toggleDescription() {
+        this.showMore = !this.showMore;
+        if (this.showMore) {
+            this.seeMore();
+        } else {
+            this.seeLess()
+        }
+    }
 }
